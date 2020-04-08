@@ -49,15 +49,10 @@ class OpenNebulaInventoryCreator:
 
     @staticmethod
     def get_ip(context):
-        ip = context.get("ETH0_IP")
-
-        if ip is None:
-            ip = context.get("ETH4_IP")
-
-        if ip is None:
-            ip = context.get("ETH2_IP")
-
-        return ip
+        if type(context) is list:
+            return next(iter(context[0].items()))[1]
+        else:
+            return next(iter(context.items()))[1]
 
     @staticmethod
     def get_labels(context):
@@ -73,7 +68,7 @@ class OpenNebulaInventoryCreator:
         vm_pool = []
 
         for vm in self.get_vm_list():
-            ip = self.get_ip(vm.TEMPLATE["CONTEXT"])
+            ip = self.get_ip(vm.TEMPLATE["NIC"])
             labels = self.get_labels(vm.USER_TEMPLATE)
 
             if ip is None or labels is None:
