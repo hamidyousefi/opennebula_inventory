@@ -56,7 +56,7 @@ Copy `opennebula_inventory.py` into Ansible's predefined module's path.
 ## Examples
 ```yaml
 - name: create yaml formatted inventory file from opennebula hosted virtual machines
-  opennebula-inventory:
+  opennebula_inventory:
     api: "https://domain.tld:2633/RPC2"
     username: opennebula-username
     password: opennebula-password
